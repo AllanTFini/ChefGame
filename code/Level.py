@@ -9,6 +9,7 @@ class Level:
         self.window = window
         self.player = Player((WINDOW_WIDTH/2 , 300))
 
+
     def run(self):
         clock = pygame.time.Clock()
 
@@ -20,6 +21,7 @@ class Level:
             self.player.rotate()
 
             self.window.blit(self.player.surface, self.player.rect)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
