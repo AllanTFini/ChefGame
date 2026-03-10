@@ -12,6 +12,11 @@ MENU_OPTIONS = { 0 : 'PLAY GAME',
                  3 : 'QUIT'
 }
 
+# O
+OBJECT_NAME = ['bacon', 'cheese', 'chip', 'egg', 'watermelon', 'energy_drink', 'bulb', 'duck', 'glove', 'toilet_paper', 'outlet']
+OBJECT_EVENT = pygame.USEREVENT + 1
+OBJECT_SPAWN_TIME = 1500
+
 # R
 ROTATE_LEFT = pygame.K_LEFT
 ROTATE_RIGHT = pygame.K_RIGHT

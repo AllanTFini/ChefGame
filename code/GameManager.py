@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 
 from code.Constants import WINDOW_HEIGHT, WINDOW_WIDTH, MENU_OPTIONS
@@ -23,6 +25,6 @@ class GameManager:
             print("Go to Credits")
         elif menu_choice == MENU_OPTIONS[3]:
             pygame.quit()
-            quit()
+            sys.exit()
         else:
             pass
