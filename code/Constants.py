@@ -4,22 +4,39 @@ import pygame
 COLOR_MENU_TITLE = (255, 215, 0)
 COLOR_MENU_OPTIONS = (245, 245, 220)
 COLOR_MENU_SELECTED = (220, 20, 60)
+COLOR_WHITE = (255, 255, 255)
 
 # M
 MENU_OPTIONS = { 0 : 'PLAY GAME',
-                 1 : 'SCORE',
-                 2 : 'CREDITS',
-                 3 : 'QUIT'
+                 1 : 'CREDITS',
+                 2 : 'QUIT'
 }
 
 # O
 OBJECT_NAME = ['bacon', 'cheese', 'chip', 'egg', 'watermelon', 'energy_drink', 'bulb', 'duck', 'glove', 'toilet_paper', 'outlet']
 OBJECT_EVENT = pygame.USEREVENT + 1
-OBJECT_SPAWN_TIME = 1500
+OBJECT_SPAWN_TIME = 500
+OBJECT_SCORE = {'bacon' : 100,
+                'cheese' : 200,
+                'chip' : 50,
+                'egg' : 150,
+                'watermelon' : 300,
+                'energy_drink' : 250,
+                'bulb' : -50,
+                'duck' : -100,
+                'glove' : -200,
+                'toilet_paper' : -300,
+                'outlet' : -250
+               }
 
 # R
 ROTATE_LEFT = pygame.K_LEFT
 ROTATE_RIGHT = pygame.K_RIGHT
+
+# T
+TIMEOUT_EVENT = pygame.USEREVENT + 2
+TIMEOUT_STEP = 1000
+TIMEOUT_LEVEL = 15000
 
 # W
 WINDOW_HEIGHT = 360
