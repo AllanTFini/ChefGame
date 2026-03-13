@@ -3,7 +3,8 @@ import pygame
 from pygame import Font, Surface, Rect
 
 from code.Constants import WINDOW_WIDTH, OBJECT_NAME, OBJECT_EVENT, OBJECT_SPAWN_TIME, WINDOW_HEIGHT, COLOR_WHITE, \
-    OBJECT_SCORE, TIMEOUT_EVENT, TIMEOUT_STEP, TIMEOUT_LEVEL
+    OBJECT_SCORE, TIMEOUT_EVENT, TIMEOUT_STEP, TIMEOUT_LEVEL, COLOR_BLACK, PANEL_HEIGHT, PANEL_WIDTH, PANEL_POSITION, \
+    COLOR_MENU_TITLE, COLOR_MENU_OPTIONS
 from code.ObjectFactory import ObjectFactory
 from code.ObjectMediator import ObjectMediator
 from code.Player import Player
@@ -20,32 +21,36 @@ class Level:
         self.mediator = ObjectMediator()
         self.timeout = TIMEOUT_LEVEL
 
+
     def run(self):
         clock = pygame.time.Clock()
 
         while True:
             clock.tick(60)
 
-            self.window.fill((0, 0, 0))
+            self.window.fill(COLOR_BLACK)
 
-            self.write_text(f'SCORE: {self.player.score}', 30, COLOR_WHITE, (WINDOW_WIDTH / 1.5, 40))
+            self.write_text(f'{self.timeout / 1000:.1f}s', 30, COLOR_WHITE, (40, 20))
+
+            pygame.draw.rect(self.window, COLOR_MENU_OPTIONS,(PANEL_POSITION[0], PANEL_POSITION[1], PANEL_WIDTH, PANEL_HEIGHT))
+
+            self.write_text(f'SCORE: {self.player.score}', 30, COLOR_BLACK, (WINDOW_WIDTH / 1.5, 40))
 
             for i in range(6):
                 obj_image = pygame.image.load(f'./Assets/{OBJECT_NAME[i]}.png').convert_alpha()
                 self.window.blit(source=obj_image, dest=(WINDOW_WIDTH - (WINDOW_WIDTH / 4), WINDOW_HEIGHT / 10 * i + 60))
-                self.write_text(f'{OBJECT_SCORE.get(OBJECT_NAME[i])}', 20, COLOR_WHITE,(WINDOW_WIDTH - (WINDOW_WIDTH / 4 -50), WINDOW_HEIGHT / 10 * i + 80))
+                self.write_text(f'{OBJECT_SCORE.get(OBJECT_NAME[i])}', 20, COLOR_BLACK,(WINDOW_WIDTH - (WINDOW_WIDTH / 4 -50), WINDOW_HEIGHT / 10 * i + 80))
 
             for j in range(6, 11):
                 obj_image = pygame.image.load(f'./Assets/{OBJECT_NAME[j]}.png').convert_alpha()
                 self.window.blit(source=obj_image, dest=(WINDOW_WIDTH / 1.8, WINDOW_HEIGHT / 10 * (j - 6) + 80))
-                self.write_text(f'{OBJECT_SCORE.get(OBJECT_NAME[j])}', 20, COLOR_WHITE,(WINDOW_WIDTH / 1.8 +50, WINDOW_HEIGHT / 10 * (j - 6) + 95))
+                self.write_text(f'{OBJECT_SCORE.get(OBJECT_NAME[j])}', 20, COLOR_BLACK,(WINDOW_WIDTH / 1.8 +50, WINDOW_HEIGHT / 10 * (j - 6) + 95))
 
+            self.mediator.handle_collision(player=self.player, object_list=self.object_list)
 
             self.player.rotate()
             self.player.draw(self.window)
 
-
-            self.mediator.handle_collision(player=self.player, object_list=self.object_list)
 
             for obj in self.object_list:
                 obj.update()

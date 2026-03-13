@@ -4,27 +4,33 @@ from pygame.rect import Rect
 from pygame.surface import Surface
 
 from code.Constants import WINDOW_HEIGHT, WINDOW_WIDTH, MENU_OPTIONS, COLOR_MENU_TITLE, COLOR_MENU_SELECTED, \
-    COLOR_MENU_OPTIONS
+    COLOR_MENU_OPTIONS, COLOR_BLACK, COLOR_WHITE
 
 
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surface = pygame.image.load('./Assets/grand_canyon.png').convert_alpha()
+        self.image = pygame.image.load('./Assets/menu_background.png').convert_alpha()
+        self.surface = pygame.transform.scale(self.image, (WINDOW_WIDTH, WINDOW_HEIGHT))
         self.rect = self.surface.get_rect(left =0, top=0)
     
     def run(self):
         menu_choice = 0
 
         while True:
-            self.window.blit(source=self.surface, dest=self.rect)
-            self.write_text('CHEF GAME', 80, COLOR_MENU_TITLE, (WINDOW_WIDTH/2, 90))
+            #self.window.blit(source=self.surface, dest=self.rect)
+            self.window.fill(COLOR_BLACK)
+
+            self.write_text('CHEF GAME', 80, COLOR_MENU_TITLE, (WINDOW_WIDTH/2, 80))
+            self.write_text('CONTROLS', 40, COLOR_WHITE, (WINDOW_WIDTH/2 * 1.4, 150))
+            self.write_text('LEFT ARROW - LOOK LEFT', 30, COLOR_WHITE, (WINDOW_WIDTH/2 * 1.4, 200))
+            self.write_text('RIGHT ARROW - LOOK RIGHT', 30, COLOR_WHITE, (WINDOW_WIDTH/2 * 1.4, 250))
 
             for i in range(len(MENU_OPTIONS)):
                 if i == menu_choice:
-                    self.write_text( MENU_OPTIONS[i], 40,COLOR_MENU_SELECTED, ((WINDOW_WIDTH / 2), 200 + 25 * i))
+                    self.write_text( MENU_OPTIONS[i], 40,COLOR_MENU_SELECTED, ((WINDOW_WIDTH / 3.5), 200 + 50 * i))
                 else:
-                    self.write_text(MENU_OPTIONS[i], 40, COLOR_MENU_OPTIONS, ((WINDOW_WIDTH / 2), 200 + 25 * i))
+                    self.write_text(MENU_OPTIONS[i], 40, COLOR_MENU_OPTIONS, ((WINDOW_WIDTH / 3.5), 200 + 50 * i))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

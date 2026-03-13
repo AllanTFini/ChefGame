@@ -7,6 +7,6 @@ class ObjectMediator:
     @staticmethod
     def handle_collision(player : Player, object_list : list):
         for obj in object_list:
-            if player.check_collision(obj.rect.center):
+            if player.check_collision(obj.rect):
                 player.score += OBJECT_SCORE[obj.name]
                 object_list.remove(obj)

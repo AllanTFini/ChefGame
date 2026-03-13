@@ -26,8 +26,6 @@ class GameManager:
             score_screen.run(final_score)
 
         elif menu_choice == MENU_OPTIONS[1]:
-            print("Go to Credits")
-        elif menu_choice == MENU_OPTIONS[2]:
             pygame.quit()
             sys.exit()
         else:

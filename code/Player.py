@@ -32,4 +32,4 @@ class Player:
             self.platter_rect.center = (self.rect.centerx - self.platter_distance, self.rect.centery)
 
     def check_collision(self,  object_rect):
-        return self.platter_rect.center  == object_rect
+        return self.platter_rect.colliderect(object_rect)
